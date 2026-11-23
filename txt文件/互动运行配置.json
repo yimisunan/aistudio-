@@ -1,0 +1,112 @@
+{
+  "version": 2,
+  "locations": [
+    "徐家主宅",
+    "市中心顶层公寓",
+    "大学",
+    "工作室",
+    "公司"
+  ],
+  "operations": [
+    "move_player",
+    "transfer_item",
+    "use_recovery_item"
+  ],
+  "resource": {
+    "status": "active",
+    "version": 2,
+    "scheme": "fixed_tiers",
+    "attribute": "体力",
+    "costs": {
+      "A": 5,
+      "B": 10,
+      "C": 15
+    },
+    "custom_reserve": 15,
+    "maximum": 100,
+    "minimum_action": 5,
+    "item_recovery_percent": 20,
+    "recovery_cycle": "between_completed_overnight_sleeps",
+    "overnight": "restore_to_maximum"
+  },
+  "progression": {
+    "clock": "game_day_and_HH:MM",
+    "close_memory": "cross_midnight_or_final_stamina_below_5",
+    "actions": "accepted_paid_story_actions",
+    "legacy_timers": "BUFF/道具/微状态/守护/破局按有效行动；任务按实际面板；监视每完整游戏小时衰减2，每有效行动一次回宅判定",
+    "stage_threshold": null,
+    "game_minutes": null
+  },
+  "secret_disclosure": {
+    "status": "pending",
+    "rule": "保持关系称谓库既有知情资格，不新增秘密解锁"
+  },
+  "memory": {
+    "fact_chars": 160,
+    "round_chars": 600,
+    "l2_chars": 240,
+    "l3_chars": 600,
+    "l4_chars": 900,
+    "context_chars": 6000,
+    "history_turns": 6,
+    "history_chars": 12000,
+    "index_entries": 24
+  },
+  "location_aliases": {
+    "家": "徐家主宅",
+    "家里": "徐家主宅",
+    "家中": "徐家主宅",
+    "主宅": "徐家主宅",
+    "徐家": "徐家主宅",
+    "公寓": "市中心顶层公寓",
+    "画室": "工作室",
+    "校外画室": "工作室",
+    "念薇画室": "工作室"
+  },
+  "shop": {
+    "status": "active",
+    "catalog": "txt文件/系统商城目录.json",
+    "cost_stamina": 0
+  },
+  "intel": {
+    "status": "active",
+    "catalog": "txt文件/商业情报目录.json",
+    "leverage_min_biz": 60,
+    "cost_stamina": 0
+  },
+  "passive": {
+    "status": "active",
+    "cost_stamina": 0,
+    "costs": {
+      "1": 20,
+      "2": 50,
+      "3": 200,
+      "4": 800
+    }
+  },
+  "director": {
+    "status": "active",
+    "catalog": "txt文件/世界变故库.json",
+    "base_prob": 0.08,
+    "max_prob": 0.85,
+    "stagnation_curve": [0.0, 0.07, 0.16, 0.28, 0.44, 0.62],
+    "global_cooldown": 1,
+    "soft_cooldown_penalty": 0.25,
+    "tier_weights": {
+      "tier1": 50,
+      "tier2": 38,
+      "tier3": 12,
+      "tier4": 22
+    },
+    "scene_exit_threshold": 3,
+    "track_weights": {
+      "thread_spark": 45,
+      "offstage_clock": 30,
+      "preset_beat": 25
+    },
+    "max_active_threads": 5,
+    "max_thread_age": 12,
+    "channel_cooldown_window": 4,
+    "clock_tick_interval": 3
+  }
+}

@@ -1,0 +1,92 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const path=require('path');
+const source=fs.readFileSync(path.join(__dirname,'../local.story.operit_bridge/main.js'),'utf8');
+const box={exports:{},ToolPkg:{ipc:{on(){}}},console,setTimeout,clearTimeout,setInterval,clearInterval};
+vm.createContext(box);vm.runInContext(source,box);
+const model={provider_id:'provider',model_id:'model'};
+box.task={entry_mode:'live_interaction',request_id:'live-test',save_epoch:'new',turns:[{kind:'user',content:JSON.stringify({entry_mode:'live_interaction',instruction:'read',output_contract:{messages:[],decision:{prompt:'抉择',options:[{id:'A'},{id:'B'},{id:'C'}]},operation:'old',handoff:'old',checks:{pace:'具体依据'},resolution:{category:'A',events:[]}}})}]};
+box.model=model;
+assert.equal(vm.runInContext('workerPath(task,"result")',box),'/api/story/worker/live-test/result');
+const turns=vm.runInContext('generationTurns(task,"")',box);
+assert(turns[1].content.includes('messages'));assert(!turns[1].content.includes('150～220'));
+const role=vm.runInContext('roleChanges(model,"live")',box);
+assert(role.characterSetting.includes('live_interaction'));
+assert(role.otherContentChat.includes('知情'));
+box.pending={entry_mode:'live_interaction',body:{text:'{"memory_deltas":{"l1_new_round":"unused"}}'}};
+box.config={outbox:box.pending};
+(async()=>{await vm.runInContext('repairMemory(config)',box);assert(!box.config.outbox.repairAttempted);console.log('BRIDGE_INTERACTION_OK routes, reminder, role, no automatic memory repair');})().catch(e=>{console.error(e);process.exitCode=1;});
+// Real final replies from the two failed user attempts; keep malformed values rejected.
+const reply='{"messages":[{"kind":"action","speaker":"沈知韫","text":"沈知韫看向你，轻轻拍了拍身旁的空位。"},{"kind":"dialogue","speaker":"沈知韫","text":"志北，过来坐会儿。今天过得怎么样？"}],"operation":,"handoff":"","checks":{"intent":"玩家输入“开始”，以简短招呼开启交流，留待玩家回应，不代写其决定。","knowledge":"母子当前同在徐家主宅；无已接受交流，不引入共同往事、玩家私有状态或继承秘密。","action":"仅沈知韫示意就座并问候，未宣称玩家已坐下，无移动或物品交付。"}}';
+const readParts=[{kind:'tool_call',toolName:'read_file',partId:'r',attributes:{path:'packet'}},{kind:'tool_result',toolName:'read_file',attributes:{status:'success'},content:'read'}];
+function final(text,stamp=1,mode='live_interaction',prefix=readParts){
+ box.receipt={outcome:{type:'committed',status:'completed',assistant:{messageTimestamp:stamp}}};
+ box.snapshots=new Map([[stamp,{messageTimestamp:stamp,parts:[...prefix,{kind:'markdown',content:text}]}]]);box.mode=mode;
+ return vm.runInContext('finalMessage(receipt,snapshots,mode)',box);
+}
+for(const stamp of [1795071121710,1795071196559]) assert.throws(()=>final(reply,stamp),/operation缺少值/);
+const wire=reply.replace('"operation":,','"operation":"",');
+const normal=final(wire).text;
+assert.equal(normal,reply.replace('"operation":,','"operation":null,'));
+assert.equal(JSON.parse(normal).operation,null);assert.equal(JSON.parse(normal).handoff,'');
+const action=wire.replace('"operation":""','"operation":{"code":"move_player","destination":"大学"}');
+assert.equal(final(action).text,action);assert.equal(final(normal).text,normal);
+const nested='{"messages":[{"kind":"narration","speaker":"","text":"字符串中 \\\"operation\\\": 不是字段"}],"checks":{"operation":"nested"},"operation" : "","handoff":""}';
+assert.equal(final(nested).text,nested.replace('"operation" : ""','"operation" : null'));
+const duplicate=wire.replace('"handoff":""','"handoff":"first","handoff":""');
+assert(final(duplicate).text.includes('"handoff":"first","handoff":""'));
+assert.throws(()=>final(wire.replace('"operation":""','"operation":null,"operation":""')),/operation字段重复/);
+assert.throws(()=>final(wire.replace('"handoff":""','"handoff":')),/handoff/);
+assert.throws(()=>final('```json\n'+wire+'\n```'),/合法JSON/);
+assert.throws(()=>final(wire,1,'live_interaction',[]),/文件工具结果/);
+assert.equal(final(wire,1,false).text,wire);
+const envelope=JSON.parse(turns[0].content),reminder=JSON.parse(turns[1].content);
+assert.equal(envelope.output_contract.operation,'');assert.equal(reminder.output_contract.operation,'');
+assert.equal(reminder.output_contract.handoff,'');assert(reminder.instruction.includes('重试也重新读取'));
+assert(role.otherContentChat.includes('空字符串'));
+console.log('LIVE_WIRE_OK two real failures rejected; empty operation normalized; action/null/duplicates/legacy preserved; complete reread required');
+
+assert.deepEqual(Object.keys(reminder.output_contract).sort(), ['checks','decision','handoff','messages','operation','resolution']);
+assert.equal(reminder.output_contract.decision.options.map(o=>o.id).join(''),'ABC');
+assert(reminder.output_contract.checks.pace);assert(role.characterSetting.includes('推演'));
+assert(!role.characterSetting.includes('不生成整回合、L1、A/B/C'));
+assert(reminder.output_contract.resolution);console.log('LIVE_RESOLUTION_OK actual envelope contract forwarded, ABC/pacing/accounting present, strict empty wire preserved');
+
+// Nullable resolution wire values: normalize only legal JSON at exact paths.
+const nullable={messages:[{kind:'narration',speaker:'',text:'内容内的task和start保持原文。'}],decision:{prompt:'下一步？',options:[{id:'A'},{id:'B'},{id:'C'}]},operation:'',handoff:'',checks:{intent:'task: nested'},resolution:{category:'A',task:'',conditions:{npc:'',effective_progress:true},sleep:{kind:'none',start:'',evidence:''},memory:{fact:'',compact:'',transfers:{}}}};
+const nullableText=JSON.stringify(nullable),nullableFinal=final(nullableText).text;
+const converted=JSON.parse(nullableFinal);
+assert.equal(converted.operation,null);assert.equal(converted.resolution.task,null);
+assert.equal(converted.resolution.sleep.start,null);assert.equal(converted.resolution.conditions.npc,null);
+assert.equal(converted.handoff,'');assert.equal(converted.resolution.memory.fact,'');
+assert.equal(converted.resolution.memory.compact,'');assert.equal(converted.messages[0].speaker,'');
+for(const name of ['task','start','npc']) assert.throws(()=>final(nullableText.replace('"'+name+'":""','"'+name+'":')),new RegExp(name+'缺少值'));
+const noConditions=JSON.parse(nullableText);noConditions.resolution.conditions='';
+assert.throws(()=>final(JSON.stringify(noConditions)),/conditions必须是完整对象/);
+noConditions.resolution.category='SYSTEM';assert.equal(JSON.parse(final(JSON.stringify(noConditions)).text).resolution.conditions,null);
+const realValues=JSON.parse(nullableText);realValues.operation=null;realValues.resolution.task={title:'明确任务'};realValues.resolution.sleep.start={day:1,time:'22:00'};realValues.resolution.conditions.npc='苏婉青';
+assert.equal(final(JSON.stringify(realValues)).text,JSON.stringify(realValues));
+assert.throws(()=>final(nullableText.replace('"task":""','"task":null,"task":""')),/resolution.task字段重复/);
+assert.throws(()=>final(nullableText.replace('"sleep":{','"sleep":null,"sleep":{')),/sleep.start字段重复/);
+const untouchedDuplicate=nullableText.replace('"fact":""','"fact":"first","fact":""');
+assert(final(untouchedDuplicate).text.includes('"fact":"first","fact":""'));
+assert.equal(final(nullableText,1,false).text,nullableText);
+box.task2={...box.task,turns:[{kind:'user',content:JSON.stringify({entry_mode:'live_interaction',instruction:'read',output_contract:nullable})}]};
+const latest=vm.runInContext('generationTurns(task2,"")',box).map(x=>JSON.parse(x.content));
+assert.equal(latest[0].output_contract.resolution.task,'');
+assert.equal(latest[0].output_contract.resolution.sleep.start,'');
+assert.equal(latest[1].output_contract.resolution.conditions.npc,'');
+assert(latest[1].instruction.includes('系统宿主'));assert(latest[1].instruction.includes('packet.read_ranges'));
+console.log('LIVE_NULLABLE_WIRE_OK task/start/npc/conditions, exact paths, duplicates, malformed rejected, objects and legacy preserved');
+
+assert.deepEqual(Array.from(role.toolAccessConfig.allowedBuiltinTools).sort(),["read_file","read_file_full","read_file_part","file_info","grep_code"].sort());
+console.log("LIVE_READ_TOOLS_OK exact readonly tools, no directory browse");
+
+const paidEnvelope={entry_mode:'live_interaction',instruction:'read',output_contract:nullable,resolution_policy:{kind:'action',conditions_required:true},operation_context:{requested:{code:'move_player',destination:'徐家主宅'}}};
+box.paidTask={...box.task,turns:[{kind:'user',content:JSON.stringify(paidEnvelope)}]};
+const paidPrompt=vm.runInContext('generationTurns(paidTask,"")',box).map(x=>JSON.parse(x.content));
+assert(paidPrompt[0].instruction.includes('不能为空或null'));assert(paidPrompt[1].instruction.includes('禁止progress'));assert.deepEqual(paidPrompt[1].operation_context.requested,{code:'move_player',destination:'徐家主宅'});
+paidEnvelope.resolution_policy={kind:'begin',conditions_required:false};paidEnvelope.output_contract={...nullable,resolution:{...nullable.resolution,category:'SYSTEM',conditions:null}};
+box.systemTask={...box.task,turns:[{kind:'user',content:JSON.stringify(paidEnvelope)}]};
+const systemPrompt=vm.runInContext('generationTurns(systemTask,"")',box).map(x=>JSON.parse(x.content));assert(systemPrompt[1].instruction.includes('本次是免费SYSTEM'));assert.equal(systemPrompt[0].output_contract.resolution.conditions,null);
+console.log('LIVE_ACTION_CONTRACT_OK paid object, SYSTEM nullable, exact fields, resolved travel');

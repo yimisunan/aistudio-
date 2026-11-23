@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "playback": {
+    "version": 1,
+    "segment_id": "prologue-81dea8ec89db2148cd01659d282e16e2",
+    "revealed": 3,
+    "completed": true
+  },
+  "segments": [
+    {
+      "version": 2,
+      "id": "prologue-81dea8ec89db2148cd01659d282e16e2",
+      "sequence": 1,
+      "count": 1,
+      "input": "",
+      "input_kind": "system",
+      "selection": {
+        "segment_id": "",
+        "option_id": "BEGIN"
+      },
+      "messages": [
+        {
+          "kind": "narration",
+          "speaker": "",
+          "text": "周日十一时五十分，徐家主宅餐厅。家庭午餐尚未开席，长桌上茶具温热。沈知韫着淡紫色缎面薄纱居家服居中，徐念薇着浅蓝色泡泡袖居家裙坐在较远一侧，苏婉青一身浅黄短裙配白开衫外出装依周日惯例到宅，手边放着伴手礼；徐志北站在桌旁，席间礼貌与暗流并存。"
+        },
+        {
+          "kind": "action",
+          "speaker": "沈知韫",
+          "text": "她扫过一圈餐桌，目光在苏婉青手边的伴手礼和念薇略远一格的座椅间掠过，自己拉开主位座椅。"
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "沈知韫",
+          "text": "[warm but guarded] 都到齐了，先落座吧。厨房那边还要一会儿，志北坐妈手边。"
+        }
+      ],
+      "decision": {
+        "prompt": "此刻，你准备怎么回应？",
+        "options": [
+          {
+            "id": "A",
+            "text": "顺势在母亲身旁落座，聊起大哥外地项目风声，暗中观察三人的神色"
+          },
+          {
+            "id": "B",
+            "text": "先替母亲与二姐斟好热茶，转手把温热茶盏递给略显拘谨的苏婉青"
+          },
+          {
+            "id": "C",
+            "text": "趁开席前的空当，当众挑起主宅与公司近期的安排，试探各自的口风"
+          }
+        ]
+      },
+      "operation": null,
+      "handoff": "",
+      "known_by": [
+        "徐志北",
+        "沈知韫",
+        "徐念薇",
+        "苏婉青"
+      ],
+      "input_known_by": [
+        "徐志北"
+      ],
+      "messages_known_by": [
+        "徐志北",
+        "沈知韫",
+        "徐念薇",
+        "苏婉青"
+      ],
+      "location": "徐家主宅",
+      "after_location": "徐家主宅",
+      "created_at": 1795438218,
+      "cost": {
+        "status": "active",
+        "kind": "prologue",
+        "total": 0
+      },
+      "audit": {
+        "origin": "registered_prologue",
+        "scenario_id": "zhiyun_sunday_noon"
+      },
+      "before_world": {
+        "progression": {
+          "runtime": {
+            "version": 1,
+            "clock": {
+              "day": 1,
+              "time": "11:50"
+            },
+            "memory_round": 1,
+            "last_closed": 0,
+            "phase": "ready",
+            "item_recovered": 0,
+            "action_index": 0,
+            "closed_by": ""
+          },
+          "stamina": 100,
+          "costs": {
+            "A": 5,
+            "B": 10,
+            "C": 15,
+            "CUSTOM": 15,
+            "REST": 0,
+            "BEGIN": 0
+          },
+          "item_budget": 20
+        },
+        "weekday": "周日",
+        "location": "徐家主宅",
+        "cast": [
+          "沈知韫",
+          "徐念薇",
+          "苏婉青"
+        ],
+        "presence": {
+          "徐志北": {
+            "location": "徐家主宅",
+            "reason": "常住"
+          },
+          "徐念薇": {
+            "location": "徐家主宅",
+            "reason": "周末在家"
+          },
+          "沈知韫": {
+            "location": "徐家主宅",
+            "reason": "常住"
+          },
+          "苏婉青": {
+            "location": "徐家主宅",
+            "reason": "周日家庭午餐窗"
+          }
+        },
+        "panels": [
+          "[系统宿主] 积分 0 | 经验值 0 | 体力 100 | 魅力 70 | 商业嗅觉 0",
+          "[沈知韫] 好感 95 | 堕落 0 | 欲望 0 | 羞耻 100 | 体力 100 | 高潮 0% | 内射 0次 | 怀孕 False | 被动 Lv.0",
+          "[徐念薇] 好感 30 | 堕落 0 | 欲望 0 | 羞耻 99 | 体力 65 | 高潮 0% | 内射 0次 | 怀孕 False | 被动 Lv.0",
+          "[苏婉青] 好感 40 | 堕落 0 | 欲望 0 | 羞耻 99 | 体力 100 | 高潮 0% | 内射 0次 | 怀孕 False | 被动 Lv.0",
+          "[徐承邺] 堕落 0"
+        ],
+        "items": [],
+        "delivered_items": [],
+        "buffs": {
+          "徐念薇": [],
+          "沈知韫": [],
+          "苏婉青": []
+        },
+        "micro_states": {
+          "徐念薇": {
+            "confusion_debt": false,
+            "momentary_ease": false,
+            "residual_tension": false
+          },
+          "沈知韫": {
+            "confusion_debt": false,
+            "momentary_ease": false,
+            "residual_tension": false
+          },
+          "苏婉青": {
+            "confusion_debt": false,
+            "momentary_ease": false,
+            "residual_tension": false
+          }
+        },
+        "physiology": {
+          "沈知韫": {
+            "cycle_phase": "安全期",
+            "pregnancy_stage": "none",
+            "latent_days_left": 0,
+            "creampie_count": 0,
+            "unrelieved_streak": 0,
+            "masturbation_trace": 0,
+            "fluid_lock_turns": 0,
+            "fluid_lock_floor": 0
+          },
+          "苏婉青": {
+            "cycle_phase": "常规期",
+            "pregnancy_stage": "none",
+            "latent_days_left": 0,
+            "creampie_count": 0,
+            "unrelieved_streak": 0,
+            "masturbation_trace": 0,
+            "fluid_lock_turns": 0,
+            "fluid_lock_floor": 0
+          },
+          "徐念薇": {
+            "cycle_phase": "危险期",
+            "pregnancy_stage": "none",
+            "latent_days_left": 0,
+            "creampie_count": 0,
+            "unrelieved_streak": 0,
+            "masturbation_trace": 0,
+            "fluid_lock_turns": 0,
+            "fluid_lock_floor": 0
+          }
+        },
+        "visual_assets": {
+          "scenes": {
+            "公司": {
+              "day": "/txt文件/image/scenes/%E5%85%AC%E5%8F%B8_day.webp?v=1795437555"
+            },
+            "大学": {
+              "day": "/txt文件/image/scenes/%E5%A4%A7%E5%AD%A6_day.webp?v=1795437554"
+            },
+            "工作室": {
+              "day": "/txt文件/image/scenes/%E5%B7%A5%E4%BD%9C%E5%AE%A4_day.webp?v=1795437554",
+              "night": "/txt文件/image/scenes/%E5%B7%A5%E4%BD%9C%E5%AE%A4_night.webp?v=1795437554"
+            },
+            "市中心顶层公寓": {
+              "day": "/txt文件/image/scenes/%E5%B8%82%E4%B8%AD%E5%BF%83%E9%A1%B6%E5%B1%82%E5%85%AC%E5%AF%93_day.webp?v=1795437554",
+              "night": "/txt文件/image/scenes/%E5%B8%82%E4%B8%AD%E5%BF%83%E9%A1%B6%E5%B1%82%E5%85%AC%E5%AF%93_night.webp?v=1795437554"
+            },
+            "徐家主宅": {
+              "day": "/txt文件/image/scenes/%E5%BE%90%E5%AE%B6%E4%B8%BB%E5%AE%85_day.webp?v=1795437554",
+              "night": "/txt文件/image/scenes/%E5%BE%90%E5%AE%B6%E4%B8%BB%E5%AE%85_night.webp?v=1795437553"
+            }
+          },
+          "characters": {
+            "徐志北": {
+              "into": "/txt文件/image/%E5%BE%90%E5%BF%97%E5%8C%97/into.png?v=1795437553"
+            },
+            "徐念薇": {
+              "into": "/txt文件/image/%E5%BE%90%E5%BF%B5%E8%96%87/into.png?v=1795437554"
+            },
+            "沈知韫": {
+              "fullbody": "/txt文件/image/%E6%B2%88%E7%9F%A5%E9%9F%AB/fullbody.png?v=1795437555"
+            },
+            "苏婉青": {
+              "fullbody2": "/txt文件/image/%E8%8B%8F%E5%A9%89%E9%9D%92/fullbody2.png?v=1795437555"
+            }
+          }
+        },
+        "vigilance": {
+          "position": "外地",
+          "targets": [
+            {
+              "name": "徐志北",
+              "vigilance": 0,
+              "discovery": 0
+            },
+            {
+              "name": "徐念薇",
+              "vigilance": 0,
+              "discovery": 0
+            },
+            {
+              "name": "沈知韫",
+              "vigilance": 0,
+              "discovery": 0
+            },
+            {
+              "name": "苏婉青",
+              "vigilance": 0,
+              "discovery": 0
+            }
+          ]
+        },
+        "passive_tiers": [
+          {
+            "level": 0,
+            "tag": "Lv.0",
+            "name": "凡人体质",
+            "cost": 0,
+            "effect": "无被动增益；越界面临正常防御或反击"
+          },
+          {
+            "level": 1,
+            "tag": "Lv.1",
+            "name": "洞察之瞳",
+            "cost": 20,
+            "effect": "精准捕捉目标生理伪装、心虚停顿与微小动摇"
+          },
+          {
+            "level": 2,
+            "tag": "Lv.2",
+            "name": "认知欺诈滤镜",
+            "cost": 50,
+            "effect": "C烈度越界好感惩罚减半（可与商业杠杆叠加）；目标潜意识优先合理化宿主行为"
+          },
+          {
+            "level": 3,
+            "tag": "Lv.3",
+            "name": "疲劳诱导",
+            "cost": 200,
+            "effect": "精准触发焦虑锚点；目标焦虑/劳作/剧烈抗拒体力消耗翻倍"
+          },
+          {
+            "level": 4,
+            "tag": "Lv.4",
+            "name": "防线支配",
+            "cost": 800,
+            "effect": "全景测绘；精准命中最脆弱节点（遗嘱焦虑/背德恐惧等）"
+          }
+        ],
+        "secrets_unlocked": [],
+        "intel": {
+          "held": [],
+          "consumed": [],
+          "su_ab_contacts": 0,
+          "leverage_armed": "",
+          "leverage_min_biz": 60,
+          "catalog": [
+            {
+              "id": "INTEL-001",
+              "name": "深圳账目异常",
+              "min_biz": 10,
+              "min_su_ab_contacts": 0,
+              "desc": "深圳分部一笔隐秘走账的异常流水线索，既可作为商业筹码，也可在关键时刻牵制对手。",
+              "effect_summary": "对沈知韫亮牌可单次扣3羞耻；对徐承邺亮牌必定赢得商业博弈（积分/经验/嗅觉+8）；或作为商业杠杆耗材。",
+              "effects": {
+                "沈知韫": {
+                  "attr": "羞耻",
+                  "delta": -3
+                },
+                "徐承邺": {
+                  "host_bonus": {
+                    "积分": 8,
+                    "经验值": 8,
+                    "商业嗅觉": 8
+                  }
+                }
+              }
+            },
+            {
+              "id": "INTEL-002",
+              "name": "苏婉青眼线身份",
+              "min_biz": 30,
+              "min_su_ab_contacts": 3,
+              "desc": "核实苏婉青在主宅探访期间向徐承邺暗中汇报动向的证据链。",
+              "effect_summary": "对苏婉青当面揭穿可单次扣10羞耻并开启专属分支；或作为商业杠杆耗材。",
+              "effects": {
+                "苏婉青": {
+                  "attr": "羞耻",
+                  "delta": -10
+                }
+              }
+            },
+            {
+              "id": "INTEL-003",
+              "name": "徐承邺收购盲区",
+              "min_biz": 60,
+              "min_su_ab_contacts": 0,
+              "desc": "徐承邺主导并购案中被刻意隐瞒的合规与估值漏洞。",
+              "effect_summary": "对沈知韫亮牌可单次+5好感；对徐承邺亮牌触发25分战略突破量级（积分/经验/嗅觉+25）；或作为商业杠杆耗材。",
+              "effects": {
+                "沈知韫": {
+                  "attr": "好感",
+                  "delta": 5
+                },
+                "徐承邺": {
+                  "host_bonus": {
+                    "积分": 25,
+                    "经验值": 25,
+                    "商业嗅觉": 25
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "tasks": {
+          "current": {
+            "id": "TASK-001",
+            "title": "同席家宴",
+            "target": "系统宿主",
+            "attr": "积分",
+            "value": 4,
+            "tier": "small",
+            "item_desc": "银杏叶金属餐巾扣",
+            "status": "进行中",
+            "issue_round": 1,
+            "complete_round": null
+          },
+          "history": [],
+          "pending_items": [],
+          "pending_item": null
+        },
+        "shop_state": {
+          "echoes": [],
+          "recent": [],
+          "redeemed": {}
+        },
+        "interaction": {
+          "count": 1,
+          "actions": 0,
+          "last_sequence": 1,
+          "segment_id": "prologue-81dea8ec89db2148cd01659d282e16e2"
+        },
+        "policy": {
+          "version": 2,
+          "locations": [
+            "徐家主宅",
+            "市中心顶层公寓",
+            "大学",
+            "工作室",
+            "公司"
+          ],
+          "operations": [
+            "move_player",
+            "transfer_item",
+            "use_recovery_item"
+          ],
+          "resource": {
+            "status": "active",
+            "version": 2,
+            "scheme": "fixed_tiers",
+            "attribute": "体力",
+            "costs": {
+              "A": 5,
+              "B": 10,
+              "C": 15
+            },
+            "custom_reserve": 15,
+            "maximum": 100,
+            "minimum_action": 5,
+            "item_recovery_percent": 20,
+            "recovery_cycle": "between_completed_overnight_sleeps",
+            "overnight": "restore_to_maximum"
+          },
+          "progression": {
+            "clock": "game_day_and_HH:MM",
+            "close_memory": "cross_midnight_or_final_stamina_below_5",
+            "actions": "accepted_paid_story_actions",
+            "legacy_timers": "BUFF/道具/微状态/守护/破局按有效行动；任务按实际面板；监视每完整游戏小时衰减2，每有效行动一次回宅判定",
+            "stage_threshold": null,
+            "game_minutes": null
+          },
+          "secret_disclosure": {
+            "status": "pending",
+            "rule": "保持关系称谓库既有知情资格，不新增秘密解锁"
+          },
+          "memory": {
+            "fact_chars": 160,
+            "round_chars": 600,
+            "l2_chars": 240,
+            "l3_chars": 600,
+            "l4_chars": 900,
+            "context_chars": 6000,
+            "history_turns": 6,
+            "history_chars": 12000,
+            "index_entries": 24
+          },
+          "location_aliases": {
+            "家": "徐家主宅",
+            "家里": "徐家主宅",
+            "家中": "徐家主宅",
+            "主宅": "徐家主宅",
+            "徐家": "徐家主宅",
+            "公寓": "市中心顶层公寓",
+            "画室": "工作室",
+            "校外画室": "工作室",
+            "念薇画室": "工作室"
+          },
+          "shop": {
+            "status": "active",
+            "catalog": "txt文件/系统商城目录.json",
+            "cost_stamina": 0
+          },
+          "intel": {
+            "status": "active",
+            "catalog": "txt文件/商业情报目录.json",
+            "leverage_min_biz": 60,
+            "cost_stamina": 0
+          },
+          "passive": {
+            "status": "active",
+            "cost_stamina": 0,
+            "costs": {
+              "1": 20,
+              "2": 50,
+              "3": 200,
+              "4": 800
+            }
+          },
+          "director": {
+            "status": "active",
+            "catalog": "txt文件/世界变故库.json",
+            "base_prob": 0.08,
+            "max_prob": 0.85,
+            "stagnation_curve": [
+              0,
+              0.07,
+              0.16,
+              0.28,
+              0.44,
+              0.62
+            ],
+            "global_cooldown": 1,
+            "soft_cooldown_penalty": 0.25,
+            "tier_weights": {
+              "tier1": 50,
+              "tier2": 38,
+              "tier3": 12,
+              "tier4": 22
+            },
+            "scene_exit_threshold": 3,
+            "track_weights": {
+              "thread_spark": 45,
+              "offstage_clock": 30,
+              "preset_beat": 25
+            },
+            "max_active_threads": 5,
+            "max_thread_age": 12,
+            "channel_cooldown_window": 4,
+            "clock_tick_interval": 3
+          }
+        }
+      }
+    }
+  ]
+}

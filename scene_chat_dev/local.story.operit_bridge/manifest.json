@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "toolpkg_id": "local.story.operit_bridge",
+  "version": "2.1.6",
+  "api_version": "2.0.0",
+  "main": "main.js",
+  "display_name": {
+    "zh": "故事桥接",
+    "en": "Story bridge"
+  },
+  "description": {
+    "zh": "双阶段流式剧情演播与后台结算、前缀冻结KV缓存、原生设置界面及双端主/副模型联动配置。",
+    "en": "Dual-stage streaming story bridge with native settings UI and dual-synced primary/settlement model controls."
+  },
+  "enabled_by_default": true,
+  "installation_scope": "device",
+  "subpackages": [
+    {
+      "id": "story_bridge",
+      "entry": "tools.js"
+    }
+  ],
+  "resources": [],
+  "requires": [
+    {
+      "id": "com.operit.character_cards",
+      "min_version": "0.2.0"
+    }
+  ]
+}
