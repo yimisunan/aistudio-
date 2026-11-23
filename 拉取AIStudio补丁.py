@@ -157,13 +157,13 @@ def fetch_repo_archive(root: Path, repo: str = f"{REPO_OWNER}/{REPO_NAME}", mirr
             api_zip = f"https://api.github.com/repos/{repo}/zipball/{br}"
             if mirror_prefix:
                 mp = mirror_prefix.rstrip("/") + "/"
-                urls.append((mp + raw_patch, f"镜像纯净补丁包 ({br})"))
-                urls.append((mp + codeload, f"镜像仓库归档 ({br})"))
+                urls.append((mp + codeload, f"镜像实时仓库归档 ({br})"))
+                urls.append((mp + raw_patch, f"镜像备用补丁包 ({br})"))
             if tok:
-                urls.append((api_zip, f"GitHub API 归档 ({br})"))
+                urls.append((api_zip, f"GitHub API 实时归档 ({br})"))
             else:
-                urls.append((raw_patch, f"GitHub 纯净补丁包 ({br})"))
-                urls.append((codeload, f"GitHub 仓库归档 ({br})"))
+                urls.append((codeload, f"GitHub 实时仓库归档 ({br})"))
+                urls.append((raw_patch, f"GitHub 备用补丁包 ({br})"))
         return urls
 
     last_err: Optional[Exception] = None

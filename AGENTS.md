@@ -120,3 +120,10 @@ execute_injection(current_round, story_nodes, memory_deltas, panel_changes,
 - **禁止改动目录（严禁 AI 写入、覆盖或删除）**：根目录 `.git/`（Git 仓库元数据）。
 - **只读运行生成物（AI 不手写）**：`data.json`（`injection_core.execute_injection` 每回合覆写的运行时快照）、`voice_config.json`（`语音运行.py` 维护）、`.round-runtime/`（含 `.round-runtime/interaction/`，引擎事务运行时状态，仅可按本次 packet 允许路径补读）、`语音仓库/`。
 - **敏感引擎与前端（未经宿主明确点名不修改，改动按 `into` L2 处理）**：`injection_core.py`、`main_template.html`、`voice_manager.html`、`语音运行.py`。
+
+## 7. AI Studio 云端维护与手机同步约定
+
+- **专属同步仓库**：AI Studio 云端改完代码后一律推送到专属同步仓 **`yimisunan/aistudio`**，**严禁建议用户 `Force push` 覆盖其原有 Python 主仓库**（云端沙盒为 Node/TS 预览版，强推会覆盖手机 Pydroid3 依赖的 `.py` 后端脚本）。
+- **手机端一键拉取**：用户在手机项目根目录运行 `拉取AIStudio补丁.py`，脚本会自动从 `yimisunan/aistudio` 拉取最新分支归档，按白名单只覆盖前端页面、知识库与 Operit 桥接产物，自动备份旧文件并绝对保护所有 `.py`、存档、角色头像与 `voice_config.json`。
+- **本地头像路径铁律**：用户手机本地三位女主均完整拥有 `into.png` 与两张全身立绘；云端缺失 `into.png` 仅是上传遗漏，严禁修改 `/txt文件/image/<角色>/into.png` 作为主路径，只允许做无损 `onerror` 兜底降级。
+- **桥接发版联动**：只要修改了 `scene_chat_dev/local.story.operit_bridge/` 下任意文件，推送前必须同步递增插件版本号、按 5 文件标准结构重新打包 `scene_chat_dev/artifacts/故事桥接-continuous-<版本>.toolpkg` 并移除旧版 `.toolpkg`，同时提示用户在手机 Operit 中重新导入新版包。
